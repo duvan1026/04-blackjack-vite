@@ -1,5 +1,6 @@
 
 import _ from 'underscore';
+import { crearDeck } from "./usecases/crear-deck";
 
 /**
  * Son funciones anonimas auto-invocadas
@@ -37,7 +38,7 @@ const miModulo = (() => {
    // Inicializa el juego     
   const inicializarJuego = ( numJugadores = 2 ) =>{
 
-      deck = crearDeck();
+      deck = crearDeck( tipos, especiales );
 
       puntosJugadores = [];
       for( let i = 0; i < numJugadores; i++ ){// Inicializa el arreglo segun el numero de jugadores.
@@ -50,26 +51,6 @@ const miModulo = (() => {
       btnPedir.disabled = false;
       btnDetener.disabled = false;
   }
-
-  // Crea y retorna un nuevo deck(baraja de cartas).
-  const crearDeck = () => {
-
-      deck = []; // INicializamos el deck                                        
-      
-      for( let i = 2; i <= 10; i++) {// Crea las cartas del 2 al 10 con los diferentes tipos(corazon, diamantes, treboles...)
-          for( let tipo of tipos  ){
-              deck.push( i + tipo );          
-          }
-      }
-      
-      for( let tipo of tipos ){// Crea las cartas de especiales
-          for( let especial of especiales ){
-              deck.push( especial + tipo );
-          }
-      }        
-      return _.shuffle( deck );// Organiza las cartas de forma randow
-  }
-
   // Esta función me permite tomar una carta
   const pedirCarta = () => {
 
