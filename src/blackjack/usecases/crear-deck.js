@@ -1,7 +1,19 @@
 import _ from 'underscore';
 
-  // Crea y retorna un nuevo deck(baraja de cartas).
+/**
+ * Crea un nuevo deck.
+ * @param {Array<String>} tiposDeCarta Ejemplo: ['C','D','H','S']
+ * @param {Array<String>} tiposEspeciales Ejemplo: ['A','J','Q','K']
+ * @returns {Array<String>} retorna un nuevo deck de cartas
+ */
 export const crearDeck = ( tiposDeCarta, tiposEspeciales ) => {
+
+    if( !tiposDeCarta  || !tiposDeCarta.length === 0 ) 
+        throw new Error('tiposDeCarta es obligatorio como un arreglo de String');// Validación propia
+
+    if( !tiposEspeciales  || !tiposEspeciales.length === 0 ) 
+        throw new Error('tiposEspeciales es obligatorio como un arreglo de String');// Validación propia
+
 
     let deck = []; // INicializamos el deck                                        
     
