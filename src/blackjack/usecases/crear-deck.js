@@ -20,3 +20,6 @@ export const crearDeck = ( tiposDeCarta, tiposEspeciales ) => {
     return _.shuffle( deck );// Organiza las cartas de forma randow
 }
 
+
+// export default crearDeck;
+
