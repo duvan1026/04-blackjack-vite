@@ -63,11 +63,6 @@ const miModulo = (() => {
   }
 
 
-  // Turno: 0 = primer jugador
-  // Turno: * = siguiente jugador
-  // Turno: ultimo = Computadora
-
-
   // Crea las cartas en el html de acuerdo al turno del jugador asignado
   const crearCarta = ( carta, turno ) => {
 
