@@ -10,7 +10,7 @@ import _ from 'underscore';
 // import { pedirCarta } from "./usecases/pedir-carta";
 // import { valorCarta } from "./usecases/valor-carta";
 /** Simplificamos y organizamos las exportaciones en el archivo index.js */
-import { crearDeck, pedirCarta, valorCarta, acumularPuntos } from "./usecases/index";
+import { crearDeck, pedirCarta, acumularPuntos, crearCarta } from "./usecases/index";
 
 /**
  * Son funciones anonimas auto-invocadas
@@ -62,16 +62,6 @@ const miModulo = (() => {
       btnDetener.disabled = false;
   }
 
-
-  // Crea las cartas en el html de acuerdo al turno del jugador asignado
-  const crearCarta = ( carta, turno ) => {
-
-      const imgCarta = document.createElement('img');//Crear una imagen
-      imgCarta.src =`./assets/cartas/${ carta }.png`; //muestra la carta escogida.
-      imgCarta.classList.add( 'carta' );
-      divCartasJugadores[ turno ].append( imgCarta ); // Insertamos carta en el html seleccionada
-
-  }
 
   // Determina quien es el ganador mostrando un mensaje emergente
   const determinarGanador = () => {
