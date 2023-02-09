@@ -13,4 +13,4 @@ Pasos para ejecutar proyecto:
 
 # Nota:
 
-En el siguiente [link]{https://jsdoc.app} en contraras la documentación al detalle de la sintaxis que trae por defecto VSCode, sirviendose como guia para documentar codigo.
+En el siguiente {link}[https://jsdoc.app] en contraras la documentación al detalle de la sintaxis que trae por defecto VSCode, sirviendose como guia para documentar codigo.
