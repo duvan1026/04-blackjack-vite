@@ -4,6 +4,7 @@ import _ from 'underscore';
 // import crearDeck from "./usecases/crear-deck"; // Exportacion por default, el nombre asignado en la variable guarda la exportacion
 // import crearDack, { SegundaExportacion } from "./usecases/crear-deck";
 import { crearDeck } from "./usecases/crear-deck";
+import { pedirCarta } from "./usecases/pedir-carta";
 
 /**
  * Son funciones anonimas auto-invocadas
@@ -54,17 +55,7 @@ const miModulo = (() => {
       btnPedir.disabled = false;
       btnDetener.disabled = false;
   }
-  // Esta función me permite tomar una carta
-  const pedirCarta = () => {
 
-      if( deck.length === 0 )
-      {
-          throw 'No hay mas cartas en el deck'; // Mensaje de alerta que se han agotado las cartas
-      }
-      const carta = deck[Math.floor(Math.random() * deck.length)]; // seleccionamos un dato randow del arreglo.
-      deck = deck.filter((i) => i !== carta); // Filtramos y eliminamos la carta seleccionada.
-      return carta;
-  }
 
   // Obtiene el valor de la carta seleccionada.
   const valorCarta = ( carta ) => {
@@ -125,7 +116,8 @@ const miModulo = (() => {
 
       do{
 
-          const carta = pedirCarta();
+          const carta = pedirCarta( deck );
+          deck = deck.filter((i) => i !== carta); // Filtramos y eliminamos la carta seleccionada.
           const turnoComputadora = puntosJugadores.length - 1;
 
           puntosComputadora = acumularPuntos( carta, turnoComputadora );
@@ -141,7 +133,8 @@ const miModulo = (() => {
   // Eventos 
   btnPedir.addEventListener( 'click',() => {
 
-      const carta = pedirCarta();
+      const carta = pedirCarta( deck );
+      deck = deck.filter((i) => i !== carta); // Filtramos y eliminamos la carta seleccionada.
       const puntosJugador = acumularPuntos( carta, 0 );
 
       crearCarta( carta, 0 );
