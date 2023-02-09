@@ -1,6 +1,10 @@
   import { pedirCarta, crearCarta, acumularPuntos, determinarGanador } from "./index";
   
-  // Turno de la Computadora
+  /**
+   * Turno de la Computadora
+   * @param {Array<Number>} puntosJugadores 
+   * @param {Array<String>} deck 
+   */
   export const turnoComputadora = ( puntosJugadores, deck ) => {
 
 
