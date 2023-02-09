@@ -10,7 +10,7 @@ import _ from 'underscore';
 // import { pedirCarta } from "./usecases/pedir-carta";
 // import { valorCarta } from "./usecases/valor-carta";
 /** Simplificamos y organizamos las exportaciones en el archivo index.js */
-import { crearDeck, pedirCarta, acumularPuntos, crearCarta } from "./usecases/index";
+import { crearDeck, pedirCarta, acumularPuntos, crearCarta, determinarGanador } from "./usecases/index";
 
 /**
  * Son funciones anonimas auto-invocadas
@@ -63,35 +63,14 @@ const miModulo = (() => {
   }
 
 
-  // Determina quien es el ganador mostrando un mensaje emergente
-  const determinarGanador = () => {
-
-      const [ puntosMinimos, puntosComputadora ] = puntosJugadores; // Desestructuración de arreglos.
-
-      setTimeout( () => {
-
-          if ( puntosComputadora === puntosMinimos ){
-              alert('Nadie gana :c');
-          }else if ( puntosMinimos > 21 ){
-              alert('Computadora gana');
-          }else if( puntosComputadora > 21 ){
-              alert('Jugador Gana');
-          }else {
-              alert('computadora gana');
-          }
-      }, 100 );
-  
-  }
-
-
 
   // Turno de la Computadora
-  const turnoComputadora = ( puntosMinimos ) => {
+  const turnoComputadora = ( ) => {
 
-      let puntosComputadora = 0;
+
+      let [ puntosMinimos, puntosComputadora ] = puntosJugadores; // Desestructuración de arreglos.
 
       do{
-
           const carta = pedirCarta( deck );
           deck = deck.filter((i) => i !== carta); // Filtramos y eliminamos la carta seleccionada.
           const turnoComputadora = puntosJugadores.length - 1;
@@ -101,7 +80,7 @@ const miModulo = (() => {
 
       } while( (puntosComputadora < puntosMinimos) && (puntosMinimos <= 21));
 
-      determinarGanador();
+      determinarGanador( puntosMinimos, puntosComputadora );
   }
 
 
