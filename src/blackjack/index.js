@@ -10,7 +10,7 @@ import _ from 'underscore';
 // import { pedirCarta } from "./usecases/pedir-carta";
 // import { valorCarta } from "./usecases/valor-carta";
 /** Simplificamos y organizamos las exportaciones en el archivo index.js */
-import { crearDeck, pedirCarta, valorCarta } from "./usecases/index";
+import { crearDeck, pedirCarta, acumularPuntos, crearCarta, turnoComputadora } from "./usecases/index";
 
 /**
  * Son funciones anonimas auto-invocadas
@@ -62,77 +62,12 @@ const miModulo = (() => {
       btnDetener.disabled = false;
   }
 
-
-  // Turno: 0 = primer jugador
-  // Turno: * = siguiente jugador
-  // Turno: ultimo = Computadora
-  const acumularPuntos = ( carta, turno ) => {
-      
-      puntosJugadores[ turno ] += valorCarta( carta );
-      LabelPuntosHTML[ turno ].innerText = puntosJugadores[ turno ];
-      return puntosJugadores[ turno ];
-  
-  }
-
-  // Crea las cartas en el html de acuerdo al turno del jugador asignado
-  const crearCarta = ( carta, turno ) => {
-
-      const imgCarta = document.createElement('img');//Crear una imagen
-      imgCarta.src =`./assets/cartas/${ carta }.png`; //muestra la carta escogida.
-      imgCarta.classList.add( 'carta' );
-      divCartasJugadores[ turno ].append( imgCarta ); // Insertamos carta en el html seleccionada
-
-  }
-
-  // Determina quien es el ganador mostrando un mensaje emergente
-  const determinarGanador = () => {
-
-      const [ puntosMinimos, puntosComputadora ] = puntosJugadores; // Desestructuración de arreglos.
-
-      setTimeout( () => {
-
-          if ( puntosComputadora === puntosMinimos ){
-              alert('Nadie gana :c');
-          }else if ( puntosMinimos > 21 ){
-              alert('Computadora gana');
-          }else if( puntosComputadora > 21 ){
-              alert('Jugador Gana');
-          }else {
-              alert('computadora gana');
-          }
-      }, 100 );
-  
-  }
-
-
-
-  // Turno de la Computadora
-  const turnoComputadora = ( puntosMinimos ) => {
-
-      let puntosComputadora = 0;
-
-      do{
-
-          const carta = pedirCarta( deck );
-          deck = deck.filter((i) => i !== carta); // Filtramos y eliminamos la carta seleccionada.
-          const turnoComputadora = puntosJugadores.length - 1;
-
-          puntosComputadora = acumularPuntos( carta, turnoComputadora );
-          crearCarta( carta, turnoComputadora );
-
-      } while( (puntosComputadora < puntosMinimos) && (puntosMinimos <= 21));
-
-      determinarGanador();
-  }
-
-
-
   // Eventos 
   btnPedir.addEventListener( 'click',() => {
 
       const carta = pedirCarta( deck );
       deck = deck.filter((i) => i !== carta); // Filtramos y eliminamos la carta seleccionada.
-      const puntosJugador = acumularPuntos( carta, 0 );
+      const puntosJugador = acumularPuntos( carta, 0, puntosJugadores );
 
       crearCarta( carta, 0 );
 
@@ -141,7 +76,7 @@ const miModulo = (() => {
           console.warn('Lo siento mucho, perdiste');
           btnPedir.disabled = true; // deshabilita el boton
           btnDetener.disabled = true;
-          turnoComputadora( puntosJugador );
+          turnoComputadora( puntosJugadores, deck );
 
       } else if ( puntosJugador === 21 ){
           console.warn('21, genial');
@@ -158,7 +93,7 @@ const miModulo = (() => {
       btnPedir.disabled = true;
       btnDetener.disabled = true;
       
-      turnoComputadora( puntosJugadores[0] );
+      turnoComputadora( puntosJugadores, deck );
   });
 
   // Evento boton Nuevo
