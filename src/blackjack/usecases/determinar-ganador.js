@@ -9,7 +9,6 @@
     if( !( puntosMinimos >= 0 ) )     throw new Error("puntosMinimos no validos");
     if( !( puntosComputadora >= 0 ) ) throw new Error("puntosComputadora no validos");
 
-
     setTimeout( () => {
 
         if ( puntosComputadora === puntosMinimos ){
