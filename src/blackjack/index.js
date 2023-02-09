@@ -3,9 +3,14 @@ import _ from 'underscore';
 // import { crearDeck as crearNuevoDeck } from "./usecases/crear-deck";// Renombramos la varable con el " nombreVariable as VariableRenombrada"
 // import crearDeck from "./usecases/crear-deck"; // Exportacion por default, el nombre asignado en la variable guarda la exportacion
 // import crearDack, { SegundaExportacion } from "./usecases/crear-deck";
-import { crearDeck } from "./usecases/crear-deck";
-import { pedirCarta } from "./usecases/pedir-carta";
-import { valorCarta } from "./usecases/valor-carta";
+
+
+
+// import { crearDeck } from "./usecases/crear-deck";
+// import { pedirCarta } from "./usecases/pedir-carta";
+// import { valorCarta } from "./usecases/valor-carta";
+/** Simplificamos y organizamos las exportaciones en el archivo index.js */
+import { crearDeck, pedirCarta, valorCarta } from "./usecases/index";
 
 /**
  * Son funciones anonimas auto-invocadas
