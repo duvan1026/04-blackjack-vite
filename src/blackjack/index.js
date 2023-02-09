@@ -5,6 +5,7 @@ import _ from 'underscore';
 // import crearDack, { SegundaExportacion } from "./usecases/crear-deck";
 import { crearDeck } from "./usecases/crear-deck";
 import { pedirCarta } from "./usecases/pedir-carta";
+import { valorCarta } from "./usecases/valor-carta";
 
 /**
  * Son funciones anonimas auto-invocadas
@@ -56,15 +57,6 @@ const miModulo = (() => {
       btnDetener.disabled = false;
   }
 
-
-  // Obtiene el valor de la carta seleccionada.
-  const valorCarta = ( carta ) => {
-
-      const valor = carta.substring(0, carta.length - 1); // corta el string sin tomar la ultima letra.
-      return ( isNaN( valor ) ) ? 
-              ( valor === 'A' ) ? 11 : 10 
-              : valor * 1;
-  }
 
   // Turno: 0 = primer jugador
   // Turno: * = siguiente jugador
